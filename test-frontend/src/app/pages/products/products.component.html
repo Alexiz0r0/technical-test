@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="white-box">
+      <h3 class="box-title">Products</h3>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col">
+            <div>
+              <button class="btn btn-success">
+                <i class="fas fa-plus"></i>
+                Add a new product
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered" aria-label="my-orders-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Unit Price</th>
+                <th>Qty</th>
+                <th class="text-nowrap">Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of products">
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.availableQty }}</td>
+                <td>
+                  <div class="d-flex align-items-center justify-content-around">
+                    <a
+                      href="#"
+                      data-toggle="tooltip"
+                      data-original-title="Edit"
+                    >
+                      <i class="fas fa-pencil-alt text-inverse m-r-10"></i>
+                    </a>
+                    <a
+                      href="#"
+                      data-toggle="tooltip"
+                      data-original-title="Close"
+                    >
+                      <i class="fas fa-eraser text-danger"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

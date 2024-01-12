@@ -1,0 +1,74 @@
+<div
+  class="background-for-modal"
+  [class.oculto]="modalService.ocultarEditModal"
+>
+  <div
+    class="modal fade show"
+    id="vertical-center-modal"
+    tabindex="-1"
+    aria-labelledby="vertical-center-modal"
+    style="display: block"
+    aria-modal="true"
+    role="dialog"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header d-flex align-items-center">
+          <h4 class="modal-title" id="myLargeModalLabel">Add a new product</h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="cerrarModal()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form
+            class="form"
+            autocomplete="off"
+            [formGroup]="modalForm"
+            (submit)="saveInfo()"
+          >
+            <div class="form-group">
+              <label for="exampleInput">Product</label>
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInput"
+                  placeholder="product"
+                  readonly
+                  formControlName="product"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInput2">Qty</label>
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInput2"
+                  placeholder="Qty"
+                  formControlName="qty"
+                />
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="submit"
+                class="btn bg-primary font-medium text-start"
+                data-bs-dismiss="modal"
+                [disabled]="modalForm.invalid"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
