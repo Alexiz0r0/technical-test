@@ -1,3 +1,3 @@
 export const environments = {
-  baseUrl: 'http://localhost:8080/api/v1',
+  baseUrl: 'https://technical-test-production-d303.up.railway.app',
 };
