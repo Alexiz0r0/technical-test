@@ -16,6 +16,8 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { PagesComponent } from './pages/pages.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { UpdateAddComponent } from './pages/update-add/update-add.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
     PagesComponent,
     ProductsComponent,
     SidebarComponent,
+    LoadingComponent,
+    UpdateAddComponent,
   ],
   imports: [
     AppRoutingModule,

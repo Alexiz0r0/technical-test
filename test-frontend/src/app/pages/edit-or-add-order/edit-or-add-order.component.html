@@ -5,159 +5,166 @@
     </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <button
-          class="btn btn-secondary"
-          (click)="openModal()"
-          (submit)="saveInfo()"
-        >
-          <i class="fas fa-plus"></i>
-          Add a new product to the order
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <form
-          class="form"
-          autocomplete="off"
-          [formGroup]="orderForm"
-          (submit)="saveInfo()"
-        >
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="tb-order"
-                  placeholder="Order"
-                  formControlName="numOrder"
-                />
-                <label for="tb-order">Order#</label>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="tb-date"
-                  placeholder="Date"
-                  readonly
-                  formControlName="date"
-                />
-                <label for="tb-date">Date</label>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="tb-product"
-                  placeholder="Products"
-                  readonly
-                  formControlName="numProducts"
-                />
-                <label for="tb-product">#Products</label>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="tb-fprice"
-                  placeholder="Final price"
-                  readonly
-                  formControlName="finalPrice"
-                />
-                <label for="tb-fprice">Final Price</label>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="d-md-flex align-items-center mt-3">
-              <button
-                class="btn btn-success"
-                type="submit"
-                [disabled]="orderForm.invalid"
-              >
-                <i class="fas fa-save"></i>
-                Save the order
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row" *ngIf="order && order.cartList.length > 0">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-bordered" aria-label="my-orders-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Unit Price</th>
-                <th>Qty</th>
-                <th>Total Price</th>
-                <th class="text-nowrap">Options</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of order.cartList">
-                <td>{{ item.productId }}</td>
-                <td>{{ item.productName }}</td>
-                <td>{{ item.price }}</td>
-                <td>{{ item.qty }}</td>
-                <td>{{ item.totalPrice }}</td>
-                <td>
-                  <div class="d-flex align-items-center justify-content-around">
-                    <a
-                      class="cursor"
-                      data-toggle="tooltip"
-                      data-original-title="Edit"
-                      (click)="
-                        openEditModal(
-                          order.id,
-                          item.productId,
-                          item.productName
-                        )
-                      "
-                    >
-                      <i class="fas fa-pencil-alt text-inverse m-r-10"></i>
-                    </a>
-                    <a
-                      class="cursor"
-                      data-toggle="tooltip"
-                      data-original-title="Close"
-                      (click)="onDeleteProductById(order.id, item.productId)"
-                    >
-                      <i class="fas fa-eraser text-danger"></i>
-                    </a>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+<app-loading *ngIf="loading"></app-loading>
+<ng-container *ngIf="!loading">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <button
+            class="btn btn-secondary"
+            (click)="openModal()"
+            (submit)="saveInfo()"
+          >
+            <i class="fas fa-plus"></i>
+            Add a new product to the order
+          </button>
         </div>
       </div>
     </div>
   </div>
-</div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <form
+            class="form"
+            autocomplete="off"
+            [formGroup]="orderForm"
+            (submit)="saveInfo()"
+          >
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tb-order"
+                    placeholder="Order"
+                    formControlName="numOrder"
+                  />
+                  <label for="tb-order">Order#</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tb-date"
+                    placeholder="Date"
+                    readonly
+                    formControlName="date"
+                  />
+                  <label for="tb-date">Date</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tb-product"
+                    placeholder="Products"
+                    readonly
+                    formControlName="numProducts"
+                  />
+                  <label for="tb-product">#Products</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tb-fprice"
+                    placeholder="Final price"
+                    readonly
+                    formControlName="finalPrice"
+                  />
+                  <label for="tb-fprice">Final Price</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="d-md-flex align-items-center mt-3">
+                <button
+                  class="btn btn-success"
+                  type="submit"
+                  [disabled]="orderForm.invalid"
+                >
+                  <i class="fas fa-save"></i>
+                  Save the order
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="order && order.cartList.length > 0">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" aria-label="my-orders-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Unit Price</th>
+                  <th>Qty</th>
+                  <th>Total Price</th>
+                  <th class="text-nowrap">Options</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of order.cartList">
+                  <td>{{ item.productId }}</td>
+                  <td>{{ item.productName }}</td>
+                  <td>{{ item.price }}</td>
+                  <td>{{ item.qty }}</td>
+                  <td>{{ item.totalPrice }}</td>
+                  <td>
+                    <div
+                      class="d-flex align-items-center justify-content-around"
+                    >
+                      <a
+                        class="cursor"
+                        data-toggle="tooltip"
+                        data-original-title="Edit"
+                        (click)="
+                          openEditModal(
+                            order.id,
+                            item.productId,
+                            item.productName
+                          )
+                        "
+                      >
+                        <i class="fas fa-pencil-alt text-inverse m-r-10"></i>
+                      </a>
+                      <a
+                        class="cursor"
+                        data-toggle="tooltip"
+                        data-original-title="Close"
+                        (click)="onDeleteProductById(order.id, item.productId)"
+                      >
+                        <i class="fas fa-eraser text-danger"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
 <app-edit-modal
   [id]="id"
   [productId]="productId"

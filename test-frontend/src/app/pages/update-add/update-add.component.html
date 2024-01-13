@@ -1,0 +1,72 @@
+<app-loading *ngIf="loading"></app-loading>
+<ng-container *ngIf="!loading">
+  <div class="row">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="mb-3">{{ title }}</h5>
+          <form
+            autocomplete="off"
+            [formGroup]="productForm"
+            (submit)="saveInfo()"
+          >
+            <div class="row">
+              <div class="col-12">
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tb-fname"
+                    placeholder="Enter Name here"
+                    formControlName="name"
+                  />
+                  <label for="tb-fname">Name</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tb-qyt"
+                    placeholder="Enter availableQty here"
+                    formControlName="availableQty"
+                  />
+                  <label for="tb-qyt">Qty</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tb-price"
+                    placeholder="Enter price here"
+                    formControlName="price"
+                  />
+                  <label for="tb-price">Price</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="d-md-flex align-items-center mt-3">
+                  <div class="ms-auto mt-3 mt-md-0">
+                    <button
+                      type="submit"
+                      [disabled]="productForm.invalid"
+                      class="btn btn-secondary font-medium rounded px-4"
+                    >
+                      <div class="d-flex align-items-center">
+                        <i class="far fa-save me-2 fs-4"></i>
+                        Save
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -5,6 +5,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { EditOrAddOrderComponent } from './pages/edit-or-add-order/edit-or-add-order.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { PagesComponent } from './pages/pages.component';
+import { UpdateAddComponent } from './pages/update-add/update-add.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'add-order/:id',
         component: EditOrAddOrderComponent,
+      },
+      {
+        path: 'up-item/:id',
+        component: UpdateAddComponent,
       },
       {
         path: '',

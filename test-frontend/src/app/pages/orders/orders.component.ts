@@ -10,6 +10,7 @@ export class OrdersComponent implements OnInit {
   private orderService = inject(OrderService);
 
   public orders: any[] = [];
+  public loading: boolean = true;
 
   ngOnInit(): void {
     localStorage.removeItem('title');
@@ -18,9 +19,11 @@ export class OrdersComponent implements OnInit {
   }
 
   getOrders() {
+    this.loading = true;
     this.orderService.getOrders().subscribe({
       next: (resp) => {
         this.orders = resp;
+        this.loading = false;
       },
     });
   }

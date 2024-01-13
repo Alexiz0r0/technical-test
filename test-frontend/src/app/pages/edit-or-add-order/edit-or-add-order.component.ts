@@ -1,9 +1,15 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { delay } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalService } from '../../services/modal.service';
 import { OrderService } from '../../services/order.service';
-import { delay } from 'rxjs';
 import { UtilityService } from '../../services/utility.service';
 import Swal from 'sweetalert2';
 import { v4 as uuid } from 'uuid';
@@ -12,7 +18,9 @@ import { v4 as uuid } from 'uuid';
   selector: 'app-edit-or-add-order',
   templateUrl: './edit-or-add-order.component.html',
 })
-export class EditOrAddOrderComponent implements OnInit, OnDestroy {
+export class EditOrAddOrderComponent
+  implements OnInit, OnDestroy, AfterContentInit
+{
   private modalService = inject(ModalService);
   private orderService = inject(OrderService);
 
@@ -22,6 +30,7 @@ export class EditOrAddOrderComponent implements OnInit, OnDestroy {
   private utilityService = inject(UtilityService);
 
   public title: string = '';
+  public loading: boolean = true;
 
   public order: any;
   public body: any;
@@ -36,13 +45,14 @@ export class EditOrAddOrderComponent implements OnInit, OnDestroy {
   private _tagBtnSave: boolean = false;
 
   public orderForm: FormGroup = this.fb.group({
-    numOrder: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+    numOrder: [0, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
     finalPrice: [0],
     numProducts: [0],
     date: [''],
   });
 
   ngOnInit(): void {
+    this.loading = true;
     if (!localStorage.getItem('title')) return;
     this.title = localStorage.getItem('title')!;
     this.modalService.updateChanges.pipe(delay(250)).subscribe({
@@ -53,6 +63,9 @@ export class EditOrAddOrderComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe(({ id }) => {
       this.uploadOrder(id);
     });
+  }
+  ngAfterContentInit(): void {
+    this.loading = false;
   }
 
   ngOnDestroy(): void {
@@ -97,6 +110,7 @@ export class EditOrAddOrderComponent implements OnInit, OnDestroy {
 
   uploadOrder(id: number) {
     if (isNaN(id)) return;
+
     this.orderService.getOrderById(id).subscribe({
       next: (resp) => {
         this.order = resp;
