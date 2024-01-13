@@ -5,8 +5,13 @@
     "ng": "ng",
     "start": "ng serve -o",
     "build": "ng build",
+    "build:href": "ng build --base-href ./",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "delete:docs": "rm -r /home/alexiz/Documents/technical-test/docs",
+    "rename:dist": "mv /home/alexiz/Documents/technical-test/test-frontend/dist/test-frontend /home/alexiz/Documents/technical-test/test-frontend/dist/docs",
+    "move:docs": "mv /home/alexiz/Documents/technical-test/test-frontend/dist/docs /home/alexiz/Documents/technical-test/",
+    "build:github": "npm run delete:docs && npm run build:href && npm run rename:dist && npm run move:docs"
   },
   "private": true,
   "dependencies": {
