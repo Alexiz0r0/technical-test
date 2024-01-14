@@ -40,6 +40,7 @@ export class EditOrAddOrderComponent
 
   public productId: number = 0;
   public productName: string = '';
+  public newOrderStr: string = '';
 
   private _tagOrder: any;
   private _tagBtnSave: boolean = false;
@@ -93,12 +94,18 @@ export class EditOrAddOrderComponent
   }
 
   openModal() {
+    this.generateOrderNumber();
     if (this.order) {
       this.addId = `${this.order.id}-${uuid()}`;
     } else {
       this.addId = `n-${uuid()}`;
     }
     this.modalService.abrirModal();
+  }
+
+  generateOrderNumber() {
+    const numOrder = this.orderForm.controls['numOrder'].value;
+    this.newOrderStr = `${numOrder}-${uuid()}`;
   }
 
   openEditModal(id: number, productId: number, productName: string) {

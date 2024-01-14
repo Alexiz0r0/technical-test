@@ -20,6 +20,7 @@ import Swal from 'sweetalert2';
 })
 export class ModalComponent implements OnInit, OnChanges {
   @Input() addId: string = '';
+  @Input() newOrderStr: string = '';
   public modalService = inject(ModalService);
   private productService = inject(ProductService);
   private orderService = inject(OrderService);
@@ -31,6 +32,7 @@ export class ModalComponent implements OnInit, OnChanges {
 
   public products: any[] = [];
   public body: any;
+  public newOrderNum: number = 0;
 
   public modalForm: FormGroup = this.fb.group({
     productId: ['', Validators.required],
@@ -49,6 +51,10 @@ export class ModalComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.newOrderNum = Number(
+      this.newOrderStr.substring(0, this.newOrderStr.indexOf('-'))
+    );
+
     if (this.addId.length > 0) {
       this._characterId = Number(
         this.addId.substring(0, this.addId.indexOf('-'))
@@ -80,9 +86,10 @@ export class ModalComponent implements OnInit, OnChanges {
   }
 
   updateOrderById(newQty: any) {
+    this.body.numOrder = this.newOrderNum + 1;
     const updatedOrder = this.utilityService.addItemToCart(this.body, newQty);
     this.orderService.updateOrderById(updatedOrder.id, updatedOrder).subscribe({
-      next: (resp) => {
+      next: () => {
         this.cerrarModal();
         this.modalService.updateChanges.emit(updatedOrder.id);
         this.showSuccessToast('Your product have been saved');
@@ -94,7 +101,7 @@ export class ModalComponent implements OnInit, OnChanges {
     const qty = Number(newQty.qty);
     const productId = Number(newQty.productId);
     const body = {
-      numOrder: 1,
+      numOrder: this.newOrderNum + 1,
       cartList: [{ productId, qty }],
     };
 
