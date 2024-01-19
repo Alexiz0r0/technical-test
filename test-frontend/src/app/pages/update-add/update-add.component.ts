@@ -34,7 +34,7 @@ export class UpdateAddComponent implements OnInit, AfterContentInit {
       [
         Validators.required,
         Validators.min(0),
-        Validators.pattern(/^[1-9]\d*$/),
+        Validators.pattern(/^\d+(\.\d{1,2})?$/),
       ],
     ],
   });

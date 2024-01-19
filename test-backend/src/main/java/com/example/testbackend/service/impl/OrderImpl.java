@@ -46,7 +46,7 @@ public class OrderImpl implements IOrder {
     public float getCartAmount(List<Cart> cartList) {
 
         float totalCartAmount = 0f;
-        float singleCartAmount = 0f;
+        float singleCartAmount;
         int availableQuantity = 0;
 
         for (Cart cart : cartList) {
